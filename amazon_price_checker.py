@@ -22,6 +22,7 @@ def extract_price(URL, headers):
 
 
 def send_email(username, passkey, URL):
+    "sends mail to the user"
     server = smtplib.SMTP('smtp.gmail.com', 587)
     server.ehlo()
     server.starttls()
