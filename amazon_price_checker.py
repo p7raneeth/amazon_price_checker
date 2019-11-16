@@ -21,7 +21,7 @@ def extract_price(URL, headers):
     return int(price_conv)
 
 
-def send_email(username, passkey, URL):
+def send_email(username, passkey, URL, recipient):
     "sends mail to the user"
     server = smtplib.SMTP('smtp.gmail.com', 587)
     server.ehlo()
@@ -31,7 +31,7 @@ def send_email(username, passkey, URL):
     subject = 'price has been shooted'
     body = URL
     msg = f"subject\n\n:{subject}\ncheck the below link \n{body}"
-    server.sendmail(username, 'praneethkrishna27@hotmail.com', msg)
+    server.sendmail(username, recipient, msg)
     print('Email has been sent!!')
     server.quit()
 
@@ -39,13 +39,13 @@ def send_email(username, passkey, URL):
 if __name__ == "__main__":
     URL = 'https://www.amazon.in/Zero-One-Start-Build-Future/dp/0753555190/ref=sr_1_2?crid=1CJYVUA23YC9F&keywords=zero+to+one+book&qid=1573889759&sprefix=zero+to+%2Caps%2C296&sr=8-2'
     headers = {'User-Agent': 'Mozilla/5.0 (Windows NT 6.1; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/78.0.3904.97 Safari/537.36'}
-    with open('config_cred.txt') as json_file:
+    with open('creds_config.txt') as json_file:
         data = json.load(json_file)
-    username, passkey = data['username'], data['passkey']
+    username, passkey, recipient = data['username'], data['passkey'], data['senders']
     while(True):
         price_conv = extract_price(URL, headers)
         if price_conv < 320:
-            send_email(username, passkey, URL)
-        time.sleep(15)
+            send_email(username, passkey, URL, recipient)
+        time.sleep(100)
 
         
