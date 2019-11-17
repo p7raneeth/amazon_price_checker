@@ -18,6 +18,7 @@ def extract_price(soup):
     price_conv = ''.join(re.findall(r'\d+', price)[:-1])
     return int(price_conv)
 
+
 def extract_average_rating_value(soup):
     """ this function extracts all the avg rating value and the total number of ratings given"""
     rating = soup.find('span', {"class" : "reviewCountTextLinkedHistogram noUnderline"})
@@ -26,6 +27,9 @@ def extract_average_rating_value(soup):
     rev_cnt = ''.join(re.findall(r'\d+', rev_cnt))
     return rating, rev_cnt
 
+
+def extract_user_comments(soup):
+    pass
 
 def send_email(username, passkey, URL, recipient):
     "sends mail to the user"
