@@ -29,7 +29,10 @@ def extract_average_rating_value(soup):
 
 
 def extract_user_comments(soup):
-    pass
+    """ extracts user comments for a product"""
+    reviews = soup.find(id="cm-cr-dp-review-list").getText()
+    return reviews
+
 
 def send_email(username, passkey, URL, recipient):
     "sends mail to the user"
@@ -47,7 +50,7 @@ def send_email(username, passkey, URL, recipient):
 
 
 if __name__ == "__main__":
-    URL = 'https://www.amazon.in/Zero-One-Start-Build-Future/dp/0753555190/ref=sr_1_2?crid=1CJYVUA23YC9F&keywords=zero+to+one+book&qid=1573889759&sprefix=zero+to+%2Caps%2C296&sr=8-2'
+    URL = 'https://www.amazon.in/gp/product/B07BS4TJ43/ref=s9_acss_bw_cg_cameras_5a1_w?pf_rd_m=A1K21FY43GMZF8&pf_rd_s=merchandised-search-4&pf_rd_r=SC74XMHZT7S86DCSVTVE&pf_rd_t=101&pf_rd_p=e3c48fc6-152d-41a0-a942-d6e2bf26f3af&pf_rd_i=1388977031'
     headers = {'User-Agent': 'Mozilla/5.0 (Windows NT 6.1; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/78.0.3904.97 Safari/537.36'}
     with open('creds_config.txt') as json_file:
         data = json.load(json_file)
@@ -55,6 +58,7 @@ if __name__ == "__main__":
     page = requests.get(URL, headers=headers)
     soup = bs(page.content, 'html.parser')
     avg_rating, no_of_ratings = extract_average_rating_value(soup)
+    reviews = extract_user_comments(soup)
     while(True):
         price_conv = extract_price(soup)
         if price_conv < 320:
