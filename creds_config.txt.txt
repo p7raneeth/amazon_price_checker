@@ -1,5 +1,0 @@
-{
-"username": "praneethkrishna36@gmail.com"
-"passkey": "rjkclayuexcvtpgx"
-"recipient":"praneethkrishna27@hotmail.com" 
-}

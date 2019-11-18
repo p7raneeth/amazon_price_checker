@@ -1,5 +1,0 @@
-{
-"username": "praneethkrishna36@gmail.com",
-"passkey": "rjkclayuexcvtpgx",
-"senders":["praneethkrishna27@hotmail.com", "praneethkrishna27@hotmail.com" ]
-}
